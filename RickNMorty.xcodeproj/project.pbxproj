@@ -7,7 +7,12 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		9D68A069285D46960007366A /* ApplicationCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D68A068285D46960007366A /* ApplicationCoordinator.swift */; };
+		9D68A069285D46960007366A /* AppCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D68A068285D46960007366A /* AppCoordinator.swift */; };
+		9D68A072285E22F00007366A /* TabBarCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D68A071285E22F00007366A /* TabBarCoordinator.swift */; };
+		9D68A074285E25830007366A /* HomeCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D68A073285E25830007366A /* HomeCoordinator.swift */; };
+		9D68A076285E258B0007366A /* SearchCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D68A075285E258B0007366A /* SearchCoordinator.swift */; };
+		9D68A078285E259E0007366A /* FavoritesCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D68A077285E259E0007366A /* FavoritesCoordinator.swift */; };
+		9D68A07A285E32F30007366A /* TabBarImages.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9D68A079285E32F30007366A /* TabBarImages.xcassets */; };
 		9D89E8B0281B4657007B8573 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D89E8AF281B4657007B8573 /* AppDelegate.swift */; };
 		9D89E8B2281B4657007B8573 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D89E8B1281B4657007B8573 /* SceneDelegate.swift */; };
 		9D89E8B9281B4659007B8573 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9D89E8B8281B4659007B8573 /* Assets.xcassets */; };
@@ -31,7 +36,12 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		9D68A068285D46960007366A /* ApplicationCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplicationCoordinator.swift; sourceTree = "<group>"; };
+		9D68A068285D46960007366A /* AppCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppCoordinator.swift; sourceTree = "<group>"; };
+		9D68A071285E22F00007366A /* TabBarCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarCoordinator.swift; sourceTree = "<group>"; };
+		9D68A073285E25830007366A /* HomeCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeCoordinator.swift; sourceTree = "<group>"; };
+		9D68A075285E258B0007366A /* SearchCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchCoordinator.swift; sourceTree = "<group>"; };
+		9D68A077285E259E0007366A /* FavoritesCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesCoordinator.swift; sourceTree = "<group>"; };
+		9D68A079285E32F30007366A /* TabBarImages.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = TabBarImages.xcassets; sourceTree = "<group>"; };
 		9D89E8AC281B4657007B8573 /* rick-n-morty.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "rick-n-morty.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		9D89E8AF281B4657007B8573 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		9D89E8B1281B4657007B8573 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -71,10 +81,11 @@
 			isa = PBXGroup;
 			children = (
 				9DC8F368285D03BA0025899D /* Coordinator.swift */,
-				9D68A068285D46960007366A /* ApplicationCoordinator.swift */,
+				9D68A068285D46960007366A /* AppCoordinator.swift */,
+				9D68A071285E22F00007366A /* TabBarCoordinator.swift */,
 				9D68A06F285E12820007366A /* Home */,
 				9D68A06C285E11FE0007366A /* Search */,
-				9D68A070285E12920007366A /* Favourites */,
+				9D68A070285E12920007366A /* Favorites */,
 				9D68A06B285E11F90007366A /* Character */,
 			);
 			path = Scenes;
@@ -92,6 +103,7 @@
 		9D68A06C285E11FE0007366A /* Search */ = {
 			isa = PBXGroup;
 			children = (
+				9D68A075285E258B0007366A /* SearchCoordinator.swift */,
 				9D68A06D285E125A0007366A /* ViewControllers */,
 				9D89EC9E281E055F007B8573 /* Views */,
 			);
@@ -117,15 +129,17 @@
 		9D68A06F285E12820007366A /* Home */ = {
 			isa = PBXGroup;
 			children = (
+				9D68A073285E25830007366A /* HomeCoordinator.swift */,
 			);
 			path = Home;
 			sourceTree = "<group>";
 		};
-		9D68A070285E12920007366A /* Favourites */ = {
+		9D68A070285E12920007366A /* Favorites */ = {
 			isa = PBXGroup;
 			children = (
+				9D68A077285E259E0007366A /* FavoritesCoordinator.swift */,
 			);
-			path = Favourites;
+			path = Favorites;
 			sourceTree = "<group>";
 		};
 		9D89E8A3281B4657007B8573 = {
@@ -172,6 +186,7 @@
 			children = (
 				9D89E8B8281B4659007B8573 /* Assets.xcassets */,
 				9D89EC90281C879E007B8573 /* Colors.xcassets */,
+				9D68A079285E32F30007366A /* TabBarImages.xcassets */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -282,6 +297,7 @@
 				9D89EC91281C879E007B8573 /* Colors.xcassets in Resources */,
 				9D89E8BC281B4659007B8573 /* LaunchScreen.storyboard in Resources */,
 				9D89E8B9281B4659007B8573 /* Assets.xcassets in Resources */,
+				9D68A07A285E32F30007366A /* TabBarImages.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -297,6 +313,7 @@
 				9D89EDE52822BCF6007B8573 /* SearchIdleCollectionViewCell.swift in Sources */,
 				9D89EC9D281E0470007B8573 /* SearchViewController.swift in Sources */,
 				9D89ECA0281E058D007B8573 /* SearchIdleTableViewCell.swift in Sources */,
+				9D68A078285E259E0007366A /* FavoritesCoordinator.swift in Sources */,
 				9D89EC94281C87D1007B8573 /* UIColor+Extension.swift in Sources */,
 				9D89F726282B2F0E007B8573 /* CharacterInfoView.swift in Sources */,
 				9D89EF2E28246597007B8573 /* RoundedImageView.swift in Sources */,
@@ -305,10 +322,13 @@
 				9D89F722282B28D1007B8573 /* SearchTableViewCell.swift in Sources */,
 				9D89EDE72823309B007B8573 /* Cell+Extension.swift in Sources */,
 				9D89E8B0281B4657007B8573 /* AppDelegate.swift in Sources */,
-				9D68A069285D46960007366A /* ApplicationCoordinator.swift in Sources */,
+				9D68A069285D46960007366A /* AppCoordinator.swift in Sources */,
+				9D68A072285E22F00007366A /* TabBarCoordinator.swift in Sources */,
 				9D89E8B2281B4657007B8573 /* SceneDelegate.swift in Sources */,
+				9D68A076285E258B0007366A /* SearchCoordinator.swift in Sources */,
 				9D89ECA2281F3EA4007B8573 /* UIView+Extension.swift in Sources */,
 				9D89EC97281D6524007B8573 /* CharacterTitleView.swift in Sources */,
+				9D68A074285E25830007366A /* HomeCoordinator.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -1,0 +1,30 @@
+//
+//  ApplicationCoordinator.swift
+//  rick-n-morty
+//
+//  Created by Gleb Burstein on 18.06.2022.
+//
+
+import Foundation
+import UIKit
+
+final class AppCoordinator: Coordinator {
+  private let window: UIWindow?
+  
+  var childCoordinators = [Coordinator]()
+
+  init(window: UIWindow?) {
+    self.window = window
+  }
+
+  func start() {
+    guard let window = window else { return }
+    let tabBarController = UITabBarController()
+    window.rootViewController = tabBarController
+    window.makeKeyAndVisible()
+
+    let tabCoordinator = TabBarCoordinator(tabBarController: tabBarController)
+    tabCoordinator.start()
+    childCoordinators.append(tabCoordinator)
+  }
+}
