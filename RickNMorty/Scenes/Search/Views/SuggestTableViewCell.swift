@@ -1,5 +1,5 @@
 //
-//  SearchTableViewCell.swift
+//  SuggestTableViewCell.swift
 //  rick-n-morty
 //
 //  Created by Gleb Burstein on 11.05.2022.
@@ -8,9 +8,9 @@
 import Foundation
 import UIKit
 
-final class SearchTableViewCell: UITableViewCell {
+final class SuggestTableViewCell: UITableViewCell {
   struct Model {
-    let imageURL: URL
+    let imageURL: URL?
     let characterInfoModel: CharacterInfoView.Model
   }
 
@@ -19,6 +19,7 @@ final class SearchTableViewCell: UITableViewCell {
 
   override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
     super.init(style: style, reuseIdentifier: reuseIdentifier)
+    backgroundColor = .BG
     addSubviews()
     addConstraints()
   }
@@ -43,11 +44,10 @@ final class SearchTableViewCell: UITableViewCell {
     NSLayoutConstraint.activate([
       characterImage.topAnchor.constraint(equalTo: topAnchor, constant: 16),
       characterImage.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 16),
-      characterImage.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -23),
-      characterImage.widthAnchor.constraint(equalToConstant: 160),
-      characterImage.heightAnchor.constraint(equalToConstant: 120),
+      characterImage.widthAnchor.constraint(equalToConstant: 120),
+      characterImage.heightAnchor.constraint(equalToConstant: 160),
       infoView.centerYAnchor.constraint(equalTo: characterImage.centerYAnchor),
-      infoView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -16)
+      infoView.leadingAnchor.constraint(equalTo: characterImage.trailingAnchor, constant: 24)
     ])
   }
 }

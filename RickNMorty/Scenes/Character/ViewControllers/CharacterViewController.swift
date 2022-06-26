@@ -10,12 +10,7 @@ import UIKit
 import Kingfisher
 
 final class CharacterViewController: UIViewController {
-  struct Model {
-    let imageURL: URL
-    let title: String
-  }
-
-  private let model: Model
+  private let character: Character
 
   private lazy var scrollView: UIScrollView = {
     let scrollView = UIScrollView()
@@ -24,7 +19,7 @@ final class CharacterViewController: UIViewController {
 
   private lazy var characterImageView: UIImageView = {
     let imageView = UIImageView()
-    imageView.kf.setImage(with: model.imageURL)
+    imageView.kf.setImage(with: URL(string: character.image))
     imageView.clipsToBounds = true
     imageView.layer.cornerRadius = 10
     return imageView
@@ -33,7 +28,7 @@ final class CharacterViewController: UIViewController {
   private lazy var characterTitleView: UIView = {
     let view = CharacterTitleView(
       model: CharacterTitleView.Model(
-        title: model.title,
+        name: character.name,
         action: {
           print("Hello")
         }
@@ -46,21 +41,21 @@ final class CharacterViewController: UIViewController {
     let stackView = UIStackView()
     stackView.axis = .vertical
     stackView.addArrangedSubview(CharacterInfoCell(
-      model: CharacterInfoCell.Model(title: "Status:", value: "Alive")
+      model: CharacterInfoCell.Model(title: "Status:", value: character.status)
     ))
     stackView.addArrangedSubview(CharacterInfoCell(
-      model: CharacterInfoCell.Model(title: "Species:", value: "Human")
+      model: CharacterInfoCell.Model(title: "Species:", value: character.species)
     ))
     stackView.addArrangedSubview(CharacterInfoCell(
-      model: CharacterInfoCell.Model(title: "Gender:", value: "Male")
+      model: CharacterInfoCell.Model(title: "Gender:", value: character.gender)
     ))
     stackView.spacing = 16
     stackView.addHorizontalSeparators(color: .main)
     return stackView
   }()
 
-  init(model: Model) {
-    self.model = model
+  init(character: Character) {
+    self.character = character
     super.init(nibName: nil, bundle: nil)
   }
 
@@ -70,6 +65,7 @@ final class CharacterViewController: UIViewController {
 
   override func viewDidLoad() {
     super.viewDidLoad()
+    navigationController?.navigationBar.tintColor = .main
     view.backgroundColor = .BG
     addSubviews()
     addConstraints()
@@ -84,9 +80,7 @@ final class CharacterViewController: UIViewController {
 
   private func addConstraints() {
     [scrollView, stackView, characterTitleView, characterImageView]
-      .forEach {
-        $0.translatesAutoresizingMaskIntoConstraints = false
-      }
+      .forEach { $0.translatesAutoresizingMaskIntoConstraints = false }
 
     scrollView.pinTo(view: view)
 

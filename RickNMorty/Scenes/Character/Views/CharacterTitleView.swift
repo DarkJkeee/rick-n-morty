@@ -10,7 +10,7 @@ import UIKit
 
 final class CharacterTitleView: UIView {
   struct Model {
-    let title: String
+    let name: String
     let action: Action
   }
 
@@ -18,7 +18,7 @@ final class CharacterTitleView: UIView {
 
   private lazy var characterName: UILabel = {
     let label = UILabel()
-    label.text = model.title
+    label.text = model.name
     label.font = UIFont.systemFont(ofSize: 34, weight: .bold)
     label.textColor = .main
     return label

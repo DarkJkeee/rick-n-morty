@@ -1,5 +1,5 @@
 //
-//  SearchTableViewCell.swift
+//  RecentSearchTableViewCell.swift
 //  rick-n-morty
 //
 //  Created by Gleb Burstein on 01.05.2022.
@@ -8,8 +8,10 @@
 import Foundation
 import UIKit
 
-final class SearchIdleTableViewCell: UITableViewCell {
-  private var data = [URL]()
+final class RecentSearchTableViewCell: UITableViewCell {
+  private var urls = [URL]()
+
+  private weak var coordinator: SearchCoordinator?
 
   private lazy var flowLayout: UICollectionViewFlowLayout = {
     let layout = UICollectionViewFlowLayout()
@@ -37,8 +39,8 @@ final class SearchIdleTableViewCell: UITableViewCell {
     collectionView.delegate = self
 
     collectionView.register(
-      SearchIdleCollectionViewCell.self,
-      forCellWithReuseIdentifier: SearchIdleCollectionViewCell.reuseIdentifier
+      RecentSearchCollectionViewCell.self,
+      forCellWithReuseIdentifier: RecentSearchCollectionViewCell.reuseIdentifier
     )
     return collectionView
   }()
@@ -54,9 +56,13 @@ final class SearchIdleTableViewCell: UITableViewCell {
     fatalError("init(coder:) has not been implemented")
   }
 
-  func configureCell(with model: SearchViewController.Model) {
-    data = model.collection
+  func configureCell(
+    with model: RecentSearchViewModel.Model,
+    coordinator: SearchCoordinator?
+  ) {
+    urls = model.collection
     title.text = model.title
+    self.coordinator = coordinator
   }
 
   private func addSubviews() {
@@ -79,12 +85,12 @@ final class SearchIdleTableViewCell: UITableViewCell {
   }
 }
 
-extension SearchIdleTableViewCell: UICollectionViewDataSource {
+extension RecentSearchTableViewCell: UICollectionViewDataSource {
   func collectionView(
     _ collectionView: UICollectionView,
     numberOfItemsInSection section: Int
   ) -> Int {
-    return data.count
+    return urls.count
   }
 
   func collectionView(
@@ -92,15 +98,19 @@ extension SearchIdleTableViewCell: UICollectionViewDataSource {
     cellForItemAt indexPath: IndexPath
   ) -> UICollectionViewCell {
     let cell = collectionView.dequeueReusableCell(
-      withReuseIdentifier: SearchIdleCollectionViewCell.reuseIdentifier,
+      withReuseIdentifier: RecentSearchCollectionViewCell.reuseIdentifier,
       for: indexPath
-    ) as! SearchIdleCollectionViewCell
-    cell.configureCell(with: data[indexPath.row])
+    ) as! RecentSearchCollectionViewCell
+    cell.configureCell(with: urls[indexPath.row])
     return cell
+  }
+
+  func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+//    coordinator?.showScreen(character: )
   }
 }
 
-extension SearchIdleTableViewCell: UICollectionViewDelegateFlowLayout {
+extension RecentSearchTableViewCell: UICollectionViewDelegateFlowLayout {
   func collectionView(
     _ collectionView: UICollectionView,
     layout collectionViewLayout: UICollectionViewLayout,
@@ -110,4 +120,4 @@ extension SearchIdleTableViewCell: UICollectionViewDelegateFlowLayout {
   }
 }
 
-extension SearchIdleTableViewCell: UICollectionViewDelegate {}
+extension RecentSearchTableViewCell: UICollectionViewDelegate {}

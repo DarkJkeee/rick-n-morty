@@ -10,10 +10,5 @@ import UIKit
 
 protocol Coordinator {
   var childCoordinators: [Coordinator] { get set }
-
   func start()
-}
-
-protocol Coordinating {
-  var coordinator: Coordinator { get set }
 }
