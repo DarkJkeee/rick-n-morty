@@ -10,7 +10,7 @@ import UIKit
 import Kingfisher
 
 final class CharacterViewController: UIViewController {
-  private let character: Character
+  private let viewModel: CharacterViewModel
 
   private lazy var scrollView: UIScrollView = {
     let scrollView = UIScrollView()
@@ -19,7 +19,7 @@ final class CharacterViewController: UIViewController {
 
   private lazy var characterImageView: UIImageView = {
     let imageView = UIImageView()
-    imageView.kf.setImage(with: URL(string: character.image))
+    imageView.kf.setImage(with: URL(string: viewModel.character.image))
     imageView.clipsToBounds = true
     imageView.layer.cornerRadius = 10
     return imageView
@@ -28,7 +28,7 @@ final class CharacterViewController: UIViewController {
   private lazy var characterTitleView: UIView = {
     let view = CharacterTitleView(
       model: CharacterTitleView.Model(
-        name: character.name,
+        name: viewModel.character.name,
         action: {
           print("Hello")
         }
@@ -41,21 +41,21 @@ final class CharacterViewController: UIViewController {
     let stackView = UIStackView()
     stackView.axis = .vertical
     stackView.addArrangedSubview(CharacterInfoCell(
-      model: CharacterInfoCell.Model(title: "Status:", value: character.status)
+      model: CharacterInfoCell.Model(title: "Status:", value: viewModel.character.status)
     ))
     stackView.addArrangedSubview(CharacterInfoCell(
-      model: CharacterInfoCell.Model(title: "Species:", value: character.species)
+      model: CharacterInfoCell.Model(title: "Species:", value: viewModel.character.species)
     ))
     stackView.addArrangedSubview(CharacterInfoCell(
-      model: CharacterInfoCell.Model(title: "Gender:", value: character.gender)
+      model: CharacterInfoCell.Model(title: "Gender:", value: viewModel.character.gender)
     ))
     stackView.spacing = 16
     stackView.addHorizontalSeparators(color: .main)
     return stackView
   }()
 
-  init(character: Character) {
-    self.character = character
+  init(viewModel: CharacterViewModel) {
+    self.viewModel = viewModel
     super.init(nibName: nil, bundle: nil)
   }
 
@@ -69,6 +69,7 @@ final class CharacterViewController: UIViewController {
     view.backgroundColor = .BG
     addSubviews()
     addConstraints()
+    viewModel.addRecentCharacter()
   }
 
   private func addSubviews() {

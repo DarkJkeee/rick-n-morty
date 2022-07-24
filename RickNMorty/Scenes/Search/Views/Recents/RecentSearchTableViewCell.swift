@@ -9,9 +9,8 @@ import Foundation
 import UIKit
 
 final class RecentSearchTableViewCell: UITableViewCell {
-  private var urls = [URL]()
-
   private weak var coordinator: SearchCoordinator?
+  private var characters: [Character] = []
 
   private lazy var flowLayout: UICollectionViewFlowLayout = {
     let layout = UICollectionViewFlowLayout()
@@ -57,12 +56,14 @@ final class RecentSearchTableViewCell: UITableViewCell {
   }
 
   func configureCell(
-    with model: RecentSearchViewModel.Model,
+    with characters: [Character],
+    title: String,
     coordinator: SearchCoordinator?
   ) {
-    urls = model.collection
-    title.text = model.title
+    self.characters = characters
+    self.title.text = title
     self.coordinator = coordinator
+    collectionView.reloadData()
   }
 
   private func addSubviews() {
@@ -90,7 +91,7 @@ extension RecentSearchTableViewCell: UICollectionViewDataSource {
     _ collectionView: UICollectionView,
     numberOfItemsInSection section: Int
   ) -> Int {
-    return urls.count
+    return characters.count
   }
 
   func collectionView(
@@ -101,12 +102,12 @@ extension RecentSearchTableViewCell: UICollectionViewDataSource {
       withReuseIdentifier: RecentSearchCollectionViewCell.reuseIdentifier,
       for: indexPath
     ) as! RecentSearchCollectionViewCell
-    cell.configureCell(with: urls[indexPath.row])
+    cell.configureCell(with: URL(string: characters[indexPath.row].image))
     return cell
   }
 
   func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-//    coordinator?.showScreen(character: )
+    coordinator?.showScreen(character: characters[indexPath.row])
   }
 }
 

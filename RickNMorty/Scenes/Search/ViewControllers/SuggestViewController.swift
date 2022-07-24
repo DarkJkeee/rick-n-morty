@@ -91,10 +91,7 @@ extension SuggestViewController: UITableViewDataSource {
 }
 
 extension SuggestViewController: UITableViewDelegate {
-  func tableView(
-    _ tableView: UITableView,
-    heightForRowAt indexPath: IndexPath
-  ) -> CGFloat {
+  func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
     return 199
   }
 }

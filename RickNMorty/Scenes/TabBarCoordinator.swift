@@ -26,7 +26,10 @@ final class TabBarCoordinator: Coordinator {
     self.tabBarController = tabBarController
 
     homeCoordinator = HomeCoordinator(navigationController: UINavigationController())
-    searchCoordinator = SearchCoordinator(navigationController: UINavigationController())
+    searchCoordinator = SearchCoordinator(
+      navigationController: UINavigationController(),
+      storage: AppStorage()
+    )
     favoritesCoordinator = FavoritesCoordinator(navigationController: UINavigationController())
   }
 

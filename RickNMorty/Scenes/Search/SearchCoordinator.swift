@@ -10,6 +10,7 @@ import UIKit
 
 final class SearchCoordinator: Coordinator {
   private let navigationController: UINavigationController
+  private let storage: AppStorage
   private let suggestViewModel: SuggestViewModel
   private let recentSearchViewModel: RecentSearchViewModel
 
@@ -27,12 +28,12 @@ final class SearchCoordinator: Coordinator {
 
   init(
     navigationController: UINavigationController,
-    suggestViewModel: SuggestViewModel = SuggestViewModel(),
-    recentSearchViewModel: RecentSearchViewModel = RecentSearchViewModel()
+    storage: AppStorage
   ) {
     self.navigationController = navigationController
-    self.suggestViewModel = suggestViewModel
-    self.recentSearchViewModel = recentSearchViewModel
+    self.storage = storage
+    self.suggestViewModel = SuggestViewModel()
+    self.recentSearchViewModel = RecentSearchViewModel(storage: storage)
   }
 
   func start() {
@@ -54,7 +55,10 @@ final class SearchCoordinator: Coordinator {
   }
 
   func showScreen(character: Character) {
-    let vc = CharacterViewController(character: character)
+    let vc = CharacterViewController(viewModel: CharacterViewModel(
+      character: character,
+      storage: storage
+    ))
     navigationController.pushViewController(vc, animated: true)
   }
 }

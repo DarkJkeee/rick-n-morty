@@ -21,7 +21,7 @@ final class RecentSearchCollectionViewCell: UICollectionViewCell {
     fatalError("init(coder:) has not been implemented")
   }
 
-  func configureCell(with url: URL) {
+  func configureCell(with url: URL?) {
     imageView.kf.setImage(with: url)
   }
 

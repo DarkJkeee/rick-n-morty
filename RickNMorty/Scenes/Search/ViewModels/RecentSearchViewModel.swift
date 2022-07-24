@@ -9,24 +9,18 @@ import Foundation
 import Combine
 
 final class RecentSearchViewModel: ObservableObject {
-  struct Model {
-    let title: String
-    let collection: [URL]
+  enum Topic: String, CaseIterable {
+    case recents = "Recents"
   }
 
-  @Published var data: [Model] = []
+  private let storage: AppStorage
+  @Published var data: [Topic: [Character]] = [:]
+
+  init(storage: AppStorage) {
+    self.storage = storage
+  }
 
   func getRecents() {
-    data = [
-      Model(
-        title: "Recent",
-        collection: [
-          URL(string: "https://rickandmortyapi.com/api/character/avatar/1.jpeg")!,
-          URL(string: "https://rickandmortyapi.com/api/character/avatar/2.jpeg")!,
-          URL(string: "https://rickandmortyapi.com/api/character/avatar/3.jpeg")!,
-          URL(string: "https://rickandmortyapi.com/api/character/avatar/4.jpeg")!
-        ]
-      )
-    ]
+    data[.recents] = storage.recentCharacters
   }
 }

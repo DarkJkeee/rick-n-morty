@@ -35,6 +35,8 @@ final class SearchViewController: UIViewController {
     super.viewDidLoad()
     view.backgroundColor = .BG
     view.addSubview(omniboxView)
+    let tap = UITapGestureRecognizer(target: self, action: #selector(UIInputViewController.dismissKeyboard))
+    tap.cancelsTouchesInView = false
     [omniboxView].forEach { $0.translatesAutoresizingMaskIntoConstraints = false }
     NSLayoutConstraint.activate([
       omniboxView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
@@ -44,6 +46,7 @@ final class SearchViewController: UIViewController {
     ])
 
     omniboxView.addTarget(nil, action: #selector(textDidChanged), for: .editingChanged)
+    view.addGestureRecognizer(tap)
   }
 
   func add(asChildViewController viewController: UIViewController) {
@@ -75,5 +78,9 @@ final class SearchViewController: UIViewController {
       suggestViewModel.fetchSearch(with: text)
       coordinator?.showSuggestSearchView()
     }
+  }
+
+  @objc private func dismissKeyboard() {
+    view.endEditing(true)
   }
 }

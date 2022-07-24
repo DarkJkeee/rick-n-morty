@@ -75,22 +75,22 @@ final class RecentSearchViewController: UIViewController {
 }
 
 extension RecentSearchViewController: UITableViewDataSource {
-  func tableView(
-    _ tableView: UITableView,
-    numberOfRowsInSection section: Int
-  ) -> Int {
+  func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
     return viewModel.data.count
   }
 
-  func tableView(
-    _ tableView: UITableView,
-    cellForRowAt indexPath: IndexPath
-  ) -> UITableViewCell {
+  func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
     let cell = tableView.dequeueReusableCell(
       withIdentifier: RecentSearchTableViewCell.reuseIdentifier,
       for: indexPath
     ) as! RecentSearchTableViewCell
-    cell.configureCell(with: viewModel.data[indexPath.row], coordinator: coordinator)
+
+    let topic = RecentSearchViewModel.Topic.allCases[indexPath.row]
+    cell.configureCell(
+      with: viewModel.data[topic] ?? [],
+      title: topic.rawValue,
+      coordinator: coordinator
+    )
     return cell
   }
 }
