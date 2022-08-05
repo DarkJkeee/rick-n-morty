@@ -17,7 +17,6 @@ final class TabBarCoordinator: Coordinator {
   private let tabBarController: UITabBarController
 
   // MARK: Coordinator properties
-  var childCoordinators = [Coordinator]()
   var rootViewController: UIViewController? {
     return tabBarController
   }
@@ -46,7 +45,6 @@ final class TabBarCoordinator: Coordinator {
       image: UIImage(named: "house"),
       selectedImage: nil
     )
-    childCoordinators.append(homeCoordinator)
     controllers.append(homeController)
 
     let favoritesController = favoritesCoordinator.rootViewController
@@ -55,7 +53,6 @@ final class TabBarCoordinator: Coordinator {
       image: UIImage(named: "heart"),
       selectedImage: nil
     )
-    childCoordinators.append(favoritesCoordinator)
     controllers.append(favoritesController)
 
     let searchContoller = searchCoordinator.rootViewController
@@ -64,7 +61,6 @@ final class TabBarCoordinator: Coordinator {
       image: UIImage(named: "magnifyingglass"),
       selectedImage: nil
     )
-    childCoordinators.append(searchCoordinator)
     controllers.append(searchContoller)
 
     tabBarController.setViewControllers(controllers, animated: true)

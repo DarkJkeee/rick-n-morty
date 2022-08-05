@@ -20,8 +20,7 @@ final class SearchCoordinator: Coordinator {
   )
   private lazy var recentSearchViewController = RecentSearchViewController(viewModel: recentSearchViewModel)
   private lazy var suggestViewController = SuggestViewController(viewModel: suggestViewModel)
-  
-  var childCoordinators = [Coordinator]()
+
   var rootViewController: UIViewController {
     return navigationController
   }
