@@ -28,6 +28,7 @@ class RoundedImageView: UIImageView {
 
   override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
     super.traitCollectionDidChange(previousTraitCollection)
+    layer.borderColor = UIColor.main.cgColor
     layer.borderWidth = traitCollection.userInterfaceStyle.borderWidth
   }
 }

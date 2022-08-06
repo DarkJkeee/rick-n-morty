@@ -8,15 +8,15 @@
 import Foundation
 import UIKit
 
-class OmniboxView: UITextField {
-  private lazy var imageView: UIImageView = {
-    let imageView = UIImageView(image: UIImage(named: "magnifyingglass"))
-    return imageView
-  }()
+final class OmniboxView: UITextField {
+  private lazy var imageView = UIImageView(
+    image: UIImage(named: "magnifyingglass")?.withRenderingMode(.alwaysTemplate)
+  )
 
-  private lazy var view: UIView = {
+  private lazy var magnifyingGlassImageView: UIView = {
     let view = UIView()
     view.addSubview(imageView)
+    imageView.tintColor = .main
     [view, imageView].forEach { $0.translatesAutoresizingMaskIntoConstraints = false }
     NSLayoutConstraint.activate([
       imageView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 12),
@@ -32,20 +32,23 @@ class OmniboxView: UITextField {
     setupView()
   }
 
+  override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
+    super.traitCollectionDidChange(previousTraitCollection)
+    layer.borderColor = UIColor.main.cgColor
+  }
+
   required init?(coder: NSCoder) {
     fatalError("init(coder:) has not been implemented")
   }
 
   private func setupView() {
     placeholder = "Search for character"
-    leftView = UIImageView(image: UIImage(named: "magnifyingglass"))
     leftViewMode = .always
     textColor = .main
     tintColor = .main
+    leftView = magnifyingGlassImageView
     layer.borderWidth = 2
     layer.cornerRadius = 10
     layer.borderColor = UIColor.main.cgColor
-    leftView = view
-    leftViewMode = .always
   }
 }
