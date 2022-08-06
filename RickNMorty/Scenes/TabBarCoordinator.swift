@@ -21,15 +21,18 @@ final class TabBarCoordinator: Coordinator {
     return tabBarController
   }
 
-  init(tabBarController: UITabBarController) {
+  init(tabBarController: UITabBarController, storage: AppStorage) {
     self.tabBarController = tabBarController
 
     homeCoordinator = HomeCoordinator(navigationController: UINavigationController())
     searchCoordinator = SearchCoordinator(
       navigationController: UINavigationController(),
-      storage: AppStorage()
+      storage: storage
     )
-    favoritesCoordinator = FavoritesCoordinator(navigationController: UINavigationController())
+    favoritesCoordinator = FavoritesCoordinator(
+      navigationController: UINavigationController(),
+      storage: storage
+    )
   }
 
   func start() {

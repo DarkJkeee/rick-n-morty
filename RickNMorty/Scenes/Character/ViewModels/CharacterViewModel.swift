@@ -19,4 +19,24 @@ final class CharacterViewModel {
   func addRecentCharacter() {
     storage.recentCharacters.append(character)
   }
+
+  func favoriteCharacterChanged() {
+    if isCharacterFavorite() {
+      removeFavoriteCharacter()
+    } else {
+      addFavoriteCharacter()
+    }
+  }
+
+  func isCharacterFavorite() -> Bool {
+    storage.favoritesCharacters.contains(character)
+  }
+
+  private func addFavoriteCharacter() {
+    storage.favoritesCharacters.append(character)
+  }
+
+  private func removeFavoriteCharacter() {
+    storage.favoritesCharacters.removeAll { $0 == character }
+  }
 }

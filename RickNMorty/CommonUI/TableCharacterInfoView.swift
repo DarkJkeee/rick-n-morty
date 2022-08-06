@@ -1,5 +1,5 @@
 //
-//  CharacterInfoView.swift
+//  TableCharacterInfoView.swift
 //  rick-n-morty
 //
 //  Created by Gleb Burstein on 11.05.2022.
@@ -8,7 +8,7 @@
 import Foundation
 import UIKit
 
-final class CharacterInfoView: UIView {
+final class TableCharacterInfoView: UIView {
   struct Model {
     let name: String
     let species: String

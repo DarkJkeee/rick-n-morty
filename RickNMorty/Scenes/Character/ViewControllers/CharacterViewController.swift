@@ -12,10 +12,7 @@ import Kingfisher
 final class CharacterViewController: UIViewController {
   private let viewModel: CharacterViewModel
 
-  private lazy var scrollView: UIScrollView = {
-    let scrollView = UIScrollView()
-    return scrollView
-  }()
+  private lazy var scrollView = UIScrollView()
 
   private lazy var characterImageView: UIImageView = {
     let imageView = UIImageView()
@@ -29,8 +26,10 @@ final class CharacterViewController: UIViewController {
     let view = CharacterTitleView(
       model: CharacterTitleView.Model(
         name: viewModel.character.name,
-        action: {
-          print("Hello")
+        isFavorite: viewModel.isCharacterFavorite(),
+        action: { [weak self] completion in
+          self?.viewModel.favoriteCharacterChanged()
+          completion()
         }
       )
     )

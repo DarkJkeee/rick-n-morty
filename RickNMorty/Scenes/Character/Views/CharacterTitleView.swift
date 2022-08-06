@@ -11,7 +11,8 @@ import UIKit
 final class CharacterTitleView: UIView {
   struct Model {
     let name: String
-    let action: Action
+    let isFavorite: Bool
+    let action: (Action) -> ()
   }
 
   private let model: Model
@@ -25,12 +26,27 @@ final class CharacterTitleView: UIView {
   }()
 
   private lazy var likeButton: UIButton = {
-    let button = UIButton()
-    button.setImage(UIImage(systemName: "heart.fill"), for: .normal)
-    button.tintColor = .main
-    button.layer.cornerRadius = 24
+    var configuration = UIButton.Configuration.filled()
+    configuration.buttonSize = .large
+    configuration.cornerStyle = .capsule
+    configuration.baseBackgroundColor = .greyBG
+    configuration.baseForegroundColor = .main
+    configuration.image = UIImage(systemName: "heart")
+    let handler: UIButton.ConfigurationUpdateHandler = { button in
+      if button.isSelected {
+        button.configuration?.baseBackgroundColor = .main
+        button.configuration?.baseForegroundColor = .greyBG
+        button.configuration?.image = UIImage(systemName: "heart.fill")
+      } else {
+        button.configuration?.baseBackgroundColor = .greyBG
+        button.configuration?.baseForegroundColor = .main
+        button.configuration?.image = UIImage(systemName: "heart")
+      }
+    }
+    let button = UIButton(configuration: configuration)
+    button.isSelected = model.isFavorite
+    button.configurationUpdateHandler = handler
     button.addTarget(self, action: #selector(likeButtonTapped), for: .touchUpInside)
-    button.backgroundColor = .greyBG
     return button
   }()
 
@@ -65,6 +81,8 @@ final class CharacterTitleView: UIView {
   }
 
   @objc private func likeButtonTapped() {
-    model.action()
+    model.action {
+      likeButton.isSelected.toggle()
+    }
   }
 }

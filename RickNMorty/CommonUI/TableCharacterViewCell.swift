@@ -1,5 +1,5 @@
 //
-//  SuggestTableViewCell.swift
+//  TableCharacterViewCell.swift
 //  rick-n-morty
 //
 //  Created by Gleb Burstein on 11.05.2022.
@@ -8,14 +8,14 @@
 import Foundation
 import UIKit
 
-final class SuggestTableViewCell: UITableViewCell {
+final class TableCharacterViewCell: UITableViewCell {
   struct Model {
     let imageURL: URL?
-    let characterInfoModel: CharacterInfoView.Model
+    let characterInfoModel: TableCharacterInfoView.Model
   }
 
   private let characterImage = RoundedImageView()
-  private let infoView = CharacterInfoView()
+  private let infoView = TableCharacterInfoView()
 
   override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
     super.init(style: style, reuseIdentifier: reuseIdentifier)

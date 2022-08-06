@@ -1,33 +1,33 @@
 //
-//  SuggestViewController.swift
+//  FavoritesViewController.swift
 //  rick-n-morty
 //
-//  Created by Gleb Burstein on 18.06.2022.
+//  Created by Gleb Burstein on 06.08.2022.
 //
 
 import Foundation
 import UIKit
 import Combine
 
-final class SuggestViewController: UIViewController {
-  weak var coordinator: SearchCoordinator?
-
+final class FavoritesViewController: UIViewController {
+  private let viewModel: FavoritesViewModel
   private var cancellables = Set<AnyCancellable>()
-  private let viewModel: SuggestViewModel
 
-  private lazy var suggestTableView: UITableView = {
+  weak var coordinator: FavoritesCoordinator?
+  
+  private lazy var tableView: UITableView = {
     let tableView = UITableView()
-    tableView.dataSource = self
-    tableView.delegate = self
     tableView.register(
       TableCharacterViewCell.self,
       forCellReuseIdentifier: TableCharacterViewCell.reuseIdentifier
     )
+    tableView.dataSource = self
+    tableView.delegate = self
     tableView.backgroundColor = .BG
     return tableView
   }()
 
-  init(viewModel: SuggestViewModel) {
+  init(viewModel: FavoritesViewModel) {
     self.viewModel = viewModel
     super.init(nibName: nil, bundle: nil)
   }
@@ -38,17 +38,24 @@ final class SuggestViewController: UIViewController {
 
   override func viewDidLoad() {
     super.viewDidLoad()
+    navigationItem.title = "Favorites"
+    navigationController?.navigationBar.prefersLargeTitles = true
     addSubviews()
     addConstraints()
     addBindings()
   }
 
+  override func viewDidAppear(_ animated: Bool) {
+    super.viewDidAppear(animated)
+    viewModel.getFavorites()
+  }
+
   private func addSubviews() {
-    view.addSubview(suggestTableView)
+    view.addSubview(tableView)
   }
 
   private func addConstraints() {
-    suggestTableView.pinTo(view: view)
+    tableView.pinTo(view: view)
   }
 
   private func addBindings() {
@@ -56,14 +63,19 @@ final class SuggestViewController: UIViewController {
       .$data
       .receive(on: RunLoop.main)
       .sink { [weak self] _ in
-        self?.suggestTableView.reloadData()
+        self?.tableView.reloadData()
       }
       .store(in: &cancellables)
   }
 }
 
-extension SuggestViewController: UITableViewDataSource {
+extension FavoritesViewController: UITableViewDataSource, UITableViewDelegate {
   func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    if viewModel.data.isEmpty {
+      tableView.setEmptyMessage("No favorites yet")
+    } else {
+      tableView.restore()
+    }
     return viewModel.data.count
   }
 
@@ -88,10 +100,8 @@ extension SuggestViewController: UITableViewDataSource {
     tableView.deselectRow(at: indexPath, animated: true)
     coordinator?.showScreen(character: viewModel.data[indexPath.row])
   }
-}
 
-extension SuggestViewController: UITableViewDelegate {
   func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-    return 199
+    return 200
   }
 }

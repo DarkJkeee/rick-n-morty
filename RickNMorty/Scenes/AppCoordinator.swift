@@ -18,11 +18,15 @@ final class AppCoordinator: Coordinator {
 
   func start() {
     guard let window = window else { return }
+    let storage = AppStorage()
     let tabBarController = UITabBarController()
     window.rootViewController = tabBarController
     window.makeKeyAndVisible()
 
-    let tabCoordinator = TabBarCoordinator(tabBarController: tabBarController)
+    let tabCoordinator = TabBarCoordinator(
+      tabBarController: tabBarController,
+      storage: storage
+    )
     tabCoordinator.start()
     childCoordinators.append(tabCoordinator)
   }

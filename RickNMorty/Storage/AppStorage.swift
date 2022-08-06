@@ -10,4 +10,7 @@ import Foundation
 final class AppStorage {
   @CodableUserDefaults<[Character]>(key: "recent_characters", defaultValue: [])
   var recentCharacters: [Character]
+
+  @CodableUserDefaults<[Character]>(key: "favorites_characters", defaultValue: [])
+  var favoritesCharacters: [Character]
 }
