@@ -11,6 +11,7 @@ import Kingfisher
 
 final class CharacterViewController: UIViewController {
   private let viewModel: CharacterViewModel
+  private let strings: CharacterViewStrings
 
   private lazy var scrollView = UIScrollView()
 
@@ -40,21 +41,34 @@ final class CharacterViewController: UIViewController {
     let stackView = UIStackView()
     stackView.axis = .vertical
     stackView.addArrangedSubview(CharacterInfoCell(
-      model: CharacterInfoCell.Model(title: "Status:", value: viewModel.character.status)
+      model: CharacterInfoCell.Model(
+        title: strings.statusLabel,
+        value: viewModel.character.status
+      )
     ))
     stackView.addArrangedSubview(CharacterInfoCell(
-      model: CharacterInfoCell.Model(title: "Species:", value: viewModel.character.species)
+      model: CharacterInfoCell.Model(
+        title: strings.speciesLabel,
+        value: viewModel.character.species
+      )
     ))
     stackView.addArrangedSubview(CharacterInfoCell(
-      model: CharacterInfoCell.Model(title: "Gender:", value: viewModel.character.gender)
+      model: CharacterInfoCell.Model(
+        title: strings.genderLabel,
+        value: viewModel.character.gender
+      )
     ))
     stackView.spacing = 16
     stackView.addHorizontalSeparators(color: .main)
     return stackView
   }()
 
-  init(viewModel: CharacterViewModel) {
+  init(
+    viewModel: CharacterViewModel,
+    strings: CharacterViewStrings = CharacterViewStrings()
+  ) {
     self.viewModel = viewModel
+    self.strings = strings
     super.init(nibName: nil, bundle: nil)
   }
 

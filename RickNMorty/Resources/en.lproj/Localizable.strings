@@ -1,0 +1,11 @@
+/* Search Scene */
+"omnibox_placeholder" = "Search for character";
+"recent_topic" = "Recents";
+
+/* Favorites Scene */
+"favorites_title" = "Favorites";
+
+/* Character Scene */
+"status_title" = "Status:";
+"species_title" = "Species:";
+"gender_title" = "Gender:";

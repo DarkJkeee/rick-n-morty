@@ -16,7 +16,8 @@ final class SearchCoordinator: Coordinator {
 
   private lazy var searchViewController = SearchViewController(
     suggestViewModel: suggestViewModel,
-    recentSearchViewModel: recentSearchViewModel
+    recentSearchViewModel: recentSearchViewModel,
+    strings: SearchViewStrings()
   )
   private lazy var recentSearchViewController = RecentSearchViewController(viewModel: recentSearchViewModel)
   private lazy var suggestViewController = SuggestViewController(viewModel: suggestViewModel)

@@ -1,0 +1,11 @@
+/* Search Scene */
+"omnibox_placeholder" = "Поиск персонажа";
+"recent_topic" = "Недавние";
+
+/* Favorites Scene */
+"favorites_title" = "Избранное";
+
+/* Character Scene */
+"status_title" = "Статус:";
+"species_title" = "Вид:";
+"gender_title" = "Пол:";

@@ -26,10 +26,10 @@ final class OmniboxView: UITextField {
     ])
     return view
   }()
-  
-  override init(frame: CGRect) {
-    super.init(frame: frame)
-    setupView()
+
+  init(strings: SearchViewStrings) {
+    super.init(frame: .zero)
+    setupView(placeholderLabel: strings.omniboxPlaceholderLabel)
   }
 
   override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
@@ -41,8 +41,9 @@ final class OmniboxView: UITextField {
     fatalError("init(coder:) has not been implemented")
   }
 
-  private func setupView() {
-    placeholder = "Search for character"
+  private func setupView(placeholderLabel: String) {
+    clearButtonMode = .whileEditing
+    placeholder = placeholderLabel
     leftViewMode = .always
     textColor = .main
     tintColor = .main

@@ -88,7 +88,7 @@ extension RecentSearchViewController: UITableViewDataSource {
     let topic = RecentSearchViewModel.Topic.allCases[indexPath.row]
     cell.configureCell(
       with: viewModel.data[topic] ?? [],
-      title: topic.rawValue,
+      title: topic.localizedString(),
       coordinator: coordinator
     )
     return cell

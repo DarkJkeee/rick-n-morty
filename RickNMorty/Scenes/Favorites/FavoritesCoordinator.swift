@@ -14,7 +14,8 @@ final class FavoritesCoordinator: Coordinator {
   private let storage: AppStorage
 
   private lazy var favoritesViewController = FavoritesViewController(
-    viewModel: favoritesViewModel
+    viewModel: favoritesViewModel,
+    strings: FavoritesViewStrings()
   )
 
   var rootViewController: UIViewController {

@@ -11,6 +11,7 @@ import Combine
 
 final class FavoritesViewController: UIViewController {
   private let viewModel: FavoritesViewModel
+  private let strings: FavoritesViewStrings
   private var cancellables = Set<AnyCancellable>()
 
   weak var coordinator: FavoritesCoordinator?
@@ -27,8 +28,9 @@ final class FavoritesViewController: UIViewController {
     return tableView
   }()
 
-  init(viewModel: FavoritesViewModel) {
+  init(viewModel: FavoritesViewModel, strings: FavoritesViewStrings) {
     self.viewModel = viewModel
+    self.strings = strings
     super.init(nibName: nil, bundle: nil)
   }
 
@@ -38,7 +40,7 @@ final class FavoritesViewController: UIViewController {
 
   override func viewDidLoad() {
     super.viewDidLoad()
-    navigationItem.title = "Favorites"
+    navigationItem.title = strings.favoritesTitle
     navigationController?.navigationBar.prefersLargeTitles = true
     addSubviews()
     addConstraints()

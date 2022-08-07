@@ -14,16 +14,19 @@ final class SearchViewController: UIViewController {
   
   private let suggestViewModel: SuggestViewModel
   private let recentSearchViewModel: RecentSearchViewModel
+  private let strings: SearchViewStrings
   private var cancellables = Set<AnyCancellable>()
 
-  private lazy var omniboxView = OmniboxView()
+  private lazy var omniboxView = OmniboxView(strings: strings)
 
   init(
     suggestViewModel: SuggestViewModel,
-    recentSearchViewModel: RecentSearchViewModel
+    recentSearchViewModel: RecentSearchViewModel,
+    strings: SearchViewStrings
   ) {
     self.recentSearchViewModel = recentSearchViewModel
     self.suggestViewModel = suggestViewModel
+    self.strings = strings
     super.init(nibName: nil, bundle: nil)
   }
 

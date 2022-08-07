@@ -10,7 +10,11 @@ import Combine
 
 final class RecentSearchViewModel: ObservableObject {
   enum Topic: String, CaseIterable {
-    case recents = "Recents"
+    case recents = "recent_topic"
+
+    func localizedString() -> String {
+        return NSLocalizedString(self.rawValue, comment: "")
+    }
   }
 
   private let storage: AppStorage
